@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Security Log Analyzer Dashboard</title>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; margin: 0; background: #101418; color: #e8e8e8; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px; }
+  h1 { margin-bottom: 4px; }
+  .sub { color: #9aa4ae; margin-top: 0; }
+  .stats { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .stat { background: #1a2028; border-radius: 10px; padding: 16px 20px; min-width: 150px; border: 1px solid #232b35; }
+  .stat .num { font-size: 26px; font-weight: 700; }
+  .stat .label { color: #9aa4ae; font-size: 13px; }
+  .charts { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
+  .charts img { max-width: 100%; border-radius: 10px; background: #fff; padding: 8px; }
+  table { width: 100%; border-collapse: collapse; background: #1a2028; border-radius: 10px; overflow: hidden; border: 1px solid #232b35; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #232b35; font-size: 13px; }
+  th { background: #202834; }
+  .sev { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Security Log Analyzer Dashboard</h1>
+  <p class="sub">Auto-generated from data/db/security_events.db — demo data, not a real environment.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="num">67</div><div class="label">Login events</div></div>
+    <div class="stat"><div class="num">20</div><div class="label">Failed attempts</div></div>
+    <div class="stat"><div class="num">47</div><div class="label">Successful logins</div></div>
+    <div class="stat"><div class="num">1</div><div class="label">High-severity alerts</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Medium-severity alerts</div></div>
+  </div>
+
+  <div class="charts">
+    <img src="chart_failed_logins_timeline.png" alt="Failed logins over time" />
+    <img src="chart_top_source_ips.png" alt="Top source IPs" />
+  </div>
+
+  <h2>Alerts</h2>
+  <table>
+    <thead>
+      <tr><th>Severity</th><th>Type</th><th>Source IP</th><th>User</th><th>Time</th><th>Reason</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+            <td><span class="sev" style="background:#a12626">HIGH</span></td>
+            <td>credential stuffing success</td>
+            <td>203.0.113.77</td>
+            <td>admin</td>
+            <td>2026-09-10T13:13:43</td>
+            <td>Successful login for 'admin' from 203.0.113.77 after that IP was flagged for brute-forcing</td>
+        </tr>
+
+        <tr>
+            <td><span class="sev" style="background:#8a6300">MEDIUM</span></td>
+            <td>brute force</td>
+            <td>203.0.113.77</td>
+            <td>(multiple)</td>
+            <td>2026-09-10T13:12:06</td>
+            <td>14 failed logins from 203.0.113.77 within 10 minutes</td>
+        </tr>
+
+        <tr>
+            <td><span class="sev" style="background:#8a6300">MEDIUM</span></td>
+            <td>watchlisted source</td>
+            <td>198.51.100.23</td>
+            <td>svc-backup</td>
+            <td>2026-09-10T15:45:00</td>
+            <td>Successful login for 'svc-backup' from watchlisted IP 198.51.100.23</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
