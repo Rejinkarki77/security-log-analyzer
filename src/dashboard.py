@@ -138,7 +138,7 @@ def build_html(events, alerts):
 </div>
 </body>
 </html>"""
-    DASHBOARD_HTML.write_text(html, encoding="utf-8")
+      DASHBOARD_HTML.write_text(html, encoding="utf-8")
 
 
 def main():
